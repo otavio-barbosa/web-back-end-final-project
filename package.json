@@ -1,0 +1,21 @@
+{
+  "name": "web-back-end-final-project",
+  "version": "1.0.0",
+  "description": "Esse repositório tem o objetivo de guardar os códigos desenvolvidos para o projeto final da matéria programação web-backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node node_modules/nodemon/bin/nodemon.js app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otavio-barbosa/web-back-end-final-project.git"
+  },
+  "keywords": [],
+  "author": "Otávio Barbosa Ferreira e Guilherme Antunes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otavio-barbosa/web-back-end-final-project/issues"
+  },
+  "homepage": "https://github.com/otavio-barbosa/web-back-end-final-project#readme"
+}
