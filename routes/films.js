@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const FilmsModel = require('../models/Film')
+const Auth = require('../helpers/Auth');
+const FilmsModel = require('../models/Film');
 
-router.get("/", (req, res) => {
+router.get("/", Auth.accessValidation, (req, res) => {
   let list = FilmsModel.list();
 
   if (req.query.name) {
@@ -15,7 +16,7 @@ router.get("/", (req, res) => {
   res.json({ count: list.length, list: list });
 })
 
-router.get("/:id", (req, res) => {
+router.get("/:id", Auth.accessValidation, (req, res) => {
   let object = FilmsModel.getElementById(req.params.id);
 
   if (object) {
@@ -25,7 +26,7 @@ router.get("/:id", (req, res) => {
   }
 })
 
-router.post("/", (req, res) => {
+router.post("/", Auth.accessValidation, (req, res) => {
   let { name, generous, year, time } = req.body;
 
   if (
@@ -44,7 +45,7 @@ router.post("/", (req, res) => {
   }
 })
 
-router.put("/:id", (req, res) => {
+router.put("/:id", Auth.accessValidation, (req, res) => {
   let { name, generous, year, time } = req.body;
   let id = req.params.id
 
@@ -63,7 +64,7 @@ router.put("/:id", (req, res) => {
   }
 })
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", Auth.accessValidation, (req, res) => {
   let id = req.params.id;
 
   if (FilmsModel.delete(id)) {
