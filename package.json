@@ -20,7 +20,9 @@
   "homepage": "https://github.com/otavio-barbosa/web-back-end-final-project#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.0.1"
   }
