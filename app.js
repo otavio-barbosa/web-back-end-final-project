@@ -47,3 +47,9 @@ app.use("/", userRouter);
 
 const adminRouter = require("./routes/admin");
 app.use("/", adminRouter);
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerFile = require("./swagger_api_doc.json")
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+
