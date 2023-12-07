@@ -14,27 +14,19 @@ router.post('/register', async (req, res) => {
     res.status(422).json({ message: 'As senhas não conferem!' });
   }
 
-  //Verificando se o usuário existe
-  //findOne é um método do mongoose
-  const userExist = await User.findOne({ email: email });
-  userExist ? res.status(422).json({ message: 'Usuário já cadastrado!' }) : null;
+  const userExist = await User.find({ email: email });
 
-  //criando usuário no banco
-  const user = new User({
-    name,
-    email,
-    password
-  })
-
-  try {
-    //salva o documento no BD
-    await user.save();
-    res.status.json({
+  if (userExist) {
+    res.status(422).json({ message: 'Usuário já cadastrado!' })
+  } else {
+    await User.save(
+      name,
+      email,
+      password,
+      'USUARIO'
+    );
+    res.status(202).json({
       message: 'Usuário criado com sucesso!'
-    });
-  } catch (error) {
-    res.status(500).json({
-      message: 'Erro no servidor! ' + error
     });
   }
 })

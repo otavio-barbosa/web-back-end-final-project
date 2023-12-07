@@ -13,7 +13,7 @@ router.post("/login", async (req, res) => {
     });
   }
 
-  const user = await User.findOne({ email: email });
+  const user = await User.find({email: email});
 
   if (!user) {
     return res.status(404).json({
@@ -25,7 +25,7 @@ router.post("/login", async (req, res) => {
     const token = jwt.sign(
       { id: user._id }, '232@#!', { expiresIn: '10 min' }
     );
-
+    req.session.email = email
     res.status(202).json({
       message: 'Usuário logado com sucesso!',
       logged: true,
