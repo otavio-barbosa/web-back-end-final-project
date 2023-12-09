@@ -1,10 +1,21 @@
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
-  role: String,
+  name: {
+    type: String,
+  },
+  email: {
+    type: [{}],
+  },
+  password: {
+    type: [{}],
+  },
+  role: {
+    type: String,
+  },
+  films: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Film" }],
+  },
 });
 
 const UserModel = mongoose.model("User", UserSchema);
@@ -23,6 +34,7 @@ module.exports = {
       email: email,
       password: password,
       role: role,
+      films: [],
     });
     await user.save();
     return user;
@@ -44,6 +56,6 @@ module.exports = {
   },
 
   getById: async function (id) {
-    return await UserModel.findById(id).lean();
+    return await UserModel.findById(id).findOne();
   },
 };

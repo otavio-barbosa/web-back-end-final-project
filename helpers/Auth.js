@@ -1,3 +1,4 @@
+const UserDAO = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 module.exports = {
@@ -8,12 +9,18 @@ module.exports = {
     console.log("bear token:", beartoken);
     console.log("token:", token);
 
-    jwt.verify(token, "232@#!", (error, object) => {
+    jwt.verify(token, "232@#!", async (error, object) => {
       if (error)
         res.status(403).json({
           message: "Acesso Negado! token inválido!",
         });
       else {
+        const { id: userId } = object;
+
+        const user = await UserDAO.getById(userId);
+
+        req.user = user;
+
         next();
       }
     });

@@ -33,6 +33,10 @@ app.use(
   })
 );
 
+const routes = require("./routes/router");
+
+app.use("/", routes);
+
 const filmsRouter = require("./routes/films");
 app.use("/films", filmsRouter);
 
@@ -49,7 +53,6 @@ const adminRouter = require("./routes/admin");
 app.use("/", adminRouter);
 
 const swaggerUi = require("swagger-ui-express");
-const swaggerFile = require("./swagger_api_doc.json")
+const swaggerFile = require("./swagger_api_doc.json");
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
-

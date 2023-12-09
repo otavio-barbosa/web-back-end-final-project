@@ -1,4 +1,39 @@
-let ids = 0;
+const mongoose = require("mongoose");
+
+const { Schema } = mongoose;
+
+const filmSchema = new Schema({
+  userId: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  genre: {
+    type: [{}],
+    required: true,
+  },
+  ageRange: {
+    type: [{}],
+    required: true,
+  },
+  year: {
+    type: String,
+    required: true,
+  },
+  director: {
+    type: String,
+    required: true,
+  },
+});
+
+const Film = mongoose.model("Film", filmSchema);
+
+module.exports = { Film };
+
+/* let ids = 0;
 let films = [];
 
 module.exports = {
@@ -8,8 +43,8 @@ module.exports = {
       name: name,
       generous: generous,
       year: year,
-      time: time
-    }
+      time: time,
+    };
 
     films.push(object);
 
@@ -24,26 +59,22 @@ module.exports = {
         name: name,
         generous: generous,
         year: year,
-        time: time
-      }
+        time: time,
+      };
 
-      films[position] = object
+      films[position] = object;
     }
 
-    return films[position]
+    return films[position];
   },
   list() {
     return films;
   },
   listByName(name) {
-    let list = []
+    let list = [];
 
     for (let i = 0; i < films.length; i++) {
-      if (
-        films[i].name.toUppercase().startsWith(
-          name.toUppercase()
-        )
-      ) {
+      if (films[i].name.toUppercase().startsWith(name.toUppercase())) {
         list.push(films[i]);
       }
     }
@@ -51,14 +82,10 @@ module.exports = {
     return list;
   },
   listByGenerous(generous) {
-    let list = []
+    let list = [];
 
     for (let i = 0; i < films.length; i++) {
-      if (
-        films[i].generous.toUppercase().startsWith(
-          generous.toUppercase()
-        )
-      ) {
+      if (films[i].generous.toUppercase().startsWith(generous.toUppercase())) {
         list.push(films[i]);
       }
     }
@@ -90,5 +117,5 @@ module.exports = {
       return true;
     }
     return false;
-  }
-}
+  },
+}; */

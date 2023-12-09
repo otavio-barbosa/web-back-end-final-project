@@ -2,43 +2,39 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 
-const User = require('../models/User');
+const User = require("../models/User");
 
 router.post("/login", async (req, res) => {
   let { email, password } = req.body;
 
   if (!email || !password) {
     return res.status(422).json({
-      message: 'Preencha todos os campos!'
+      message: "Preencha todos os campos!",
     });
   }
 
-  const user = await User.find({email: email});
+  const user = await User.find({ email: email });
 
   if (!user) {
     return res.status(404).json({
-      message: 'Usuário não encontrado!'
+      message: "Usuário não encontrado!",
     });
   }
 
   try {
-    const token = jwt.sign(
-      { id: user._id }, '232@#!', { expiresIn: '10 min' }
-    );
-    req.session.email = email
+    const token = jwt.sign({ id: user._id }, "232@#!", { expiresIn: "20 min" });
+    req.session.email = email;
     res.status(202).json({
-      message: 'Usuário logado com sucesso!',
+      message: "Usuário logado com sucesso!",
       logged: true,
-      token: token
+      token: token,
     });
   } catch (error) {
-    res.status(403).json(
-      {
-        logged: false,
-        message: "Erro ao logar, verifique e tente novamente!"
-      }
-    );
+    res.status(403).json({
+      logged: false,
+      message: "Erro ao logar, verifique e tente novamente!",
+    });
   }
-})
+});
 
 module.exports = router;
