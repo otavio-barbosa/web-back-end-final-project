@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const Auth = require("../helpers/Auth");
-const GenreModel = require("../models/Genre");
 
 const genreController = require("../controllers/genreController");
 
