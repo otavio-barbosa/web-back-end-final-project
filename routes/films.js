@@ -22,14 +22,8 @@ router.put("/film/:id", Auth.accessValidation, (req, res) => {
   filmController.update(req, res);
 });
 
-router.delete("/:id", Auth.accessValidation, (req, res) => {
-  let id = req.params.id;
-
-  if (FilmsModel.delete(id)) {
-    res.json({ Message: "Filme excluido com sucesso!" });
-  } else {
-    res.status(400).json({ message: "Falha ao excluir!" });
-  }
+router.delete("/film/:id", Auth.accessValidation, (req, res) => {
+  filmController.delete(req, res);
 });
 
 module.exports = router;

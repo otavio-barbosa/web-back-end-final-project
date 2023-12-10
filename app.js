@@ -37,9 +37,6 @@ const routes = require("./routes/router");
 
 app.use("/", routes);
 
-const filmsRouter = require("./routes/films");
-app.use("/films", filmsRouter);
-
 const loginRouter = require("./routes/login");
 app.use("/", loginRouter);
 
