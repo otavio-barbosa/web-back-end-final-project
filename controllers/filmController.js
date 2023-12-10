@@ -23,7 +23,7 @@ const filmController = {
         const filmCreated = await FilmModel.create(film);
 
         if (!filmCreated) {
-          res.status(422).json({ msg: "Film não criado." });
+          res.status(422).json({ msg: "Filme não criado." });
           return;
         }
 
@@ -42,12 +42,25 @@ const filmController = {
   },
   getAll: async (req, res) => {
     try {
-      const { user } = req;
-      const films = await user.films;
-      res.json(films);
-    } catch (error) {
-      console.log(error);
-    }
+      const pageOptions = {
+          pagina: parseInt(req.query.pagina),
+          limite: parseInt(req.query.limite) 
+      }
+
+      await FilmModel.find()
+      .limit(pageOptions.limite)
+      .skip(pageOptions.limite * pageOptions.pagina)
+      .then((results) => {
+          return res.status(200).send(results);
+      })
+      .catch((err) => {
+          return res.status(500).send(err);
+      });
+    
+  } catch (error) {
+    console.log(error);
+    res.json({msg: "Por favor insira no final da URL um limite de elementos para renderização e qual pagina deseja acessar: /?limite=10/?pagina=1"})
+  }
   },
   get: async (req, res) => {
     try {

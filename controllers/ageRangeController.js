@@ -18,10 +18,24 @@ const ageRangeController = {
   },
   getAll: async (req, res) => {
     try {
-      const ageRanges = await AgeRangeModel.find();
-      res.json(ageRanges);
+        const pageOptions = {
+            pagina: parseInt(req.query.pagina),
+            limite: parseInt(req.query.limite) 
+        }
+  
+        await AgeRangeModel.find()
+        .limit(pageOptions.limite)
+        .skip(pageOptions.limite * pageOptions.pagina)
+        .then((results) => {
+            return res.status(200).send(results);
+        })
+        .catch((err) => {
+            return res.status(500).send(err);
+        });
+      
     } catch (error) {
       console.log(error);
+      res.json({msg: "Por favor insira no final da URL um limite de elementos para renderização e qual pagina deseja acessar: /?limite=10/?pagina=1"})
     }
   },
   get: async (req, res) => {

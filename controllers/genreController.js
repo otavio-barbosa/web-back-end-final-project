@@ -17,10 +17,26 @@ const genreController = {
   },
   getAll: async (req, res) => {
     try {
-      const genres = await GenreModel.find();
-      res.json(genres);
+
+        const pageOptions = {
+            pagina: parseInt(req.query.pagina),
+            limite: parseInt(req.query.limite) 
+        }
+        
+
+        await GenreModel.find()
+        .limit(pageOptions.limite)
+        .skip(pageOptions.limite * pageOptions.pagina)
+        .then((results) => {
+            return res.status(200).send(results);
+        })
+        .catch((err) => {
+            return res.status(500).send(err);
+        });
+      
     } catch (error) {
       console.log(error);
+      res.json({msg: "Por favor insira no final da URL um limite de elementos para renderização e qual pagina deseja acessar: /?limite=10/?pagina=1"})
     }
   },
   get: async (req, res) => {
