@@ -267,17 +267,17 @@
         }
       }
     },
-    "/": {
+    "/films": {
       "get": {
         "description": "",
         "parameters": [
           {
-            "name": "name",
+            "name": "pagina",
             "in": "query",
             "type": "string"
           },
           {
-            "name": "generous",
+            "name": "limite",
             "in": "query",
             "type": "string"
           },
@@ -293,53 +293,14 @@
           },
           "403": {
             "description": "Forbidden"
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
           },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "example": "any"
-                },
-                "generous": {
-                  "example": "any"
-                },
-                "year": {
-                  "example": "any"
-                },
-                "time": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
-    "/{id}": {
+    "/films/{id}": {
       "get": {
         "description": "",
         "parameters": [
@@ -359,6 +320,9 @@
           "200": {
             "description": "OK"
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "403": {
             "description": "Forbidden"
           },
@@ -366,7 +330,59 @@
             "description": "Not Found"
           }
         }
-      },
+      }
+    },
+    "/film": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "genre": {
+                  "example": "any"
+                },
+                "ageRange": {
+                  "example": "any"
+                },
+                "year": {
+                  "example": "any"
+                },
+                "director": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/film/{id}": {
       "put": {
         "description": "",
         "parameters": [
@@ -387,16 +403,19 @@
             "schema": {
               "type": "object",
               "properties": {
-                "name": {
+                "title": {
                   "example": "any"
                 },
-                "generous": {
+                "genre": {
+                  "example": "any"
+                },
+                "ageRange": {
                   "example": "any"
                 },
                 "year": {
                   "example": "any"
                 },
-                "time": {
+                "director": {
                   "example": "any"
                 }
               }
@@ -412,6 +431,9 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -439,6 +461,9 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
