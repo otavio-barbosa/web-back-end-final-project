@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema({
 const UserModel = mongoose.model("User", UserSchema);
 
 module.exports = {
+  UserModel: UserModel,
   list: async function () {
     const users = await UserModel.find({}).lean();
     return users;

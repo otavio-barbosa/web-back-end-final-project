@@ -37,6 +37,9 @@ const routes = require("./routes/router");
 
 app.use("/", routes);
 
+const installRouter = require("./routes/install");
+app.use("/", installRouter);
+
 const loginRouter = require("./routes/login");
 app.use("/", loginRouter);
 
